@@ -1,17 +1,45 @@
 buildscript {
-  repositories { jcenter() }
-  dependencies { 
-    classpath 'io.ratpack:ratpack-gradle:0.9.13' 
-    classpath 'com.netflix.nebula:gradle-ospackage-plugin:2.0.2'
+  repositories {
+      jcenter()
+      maven { url 'http://clinker.netty.io/nexus/content/repositories/snapshots' }
+  }
+  dependencies {
+      classpath 'io.ratpack:ratpack-gradle:0.9.13'
+      classpath 'io.ratpack:ratpack-jackson:0.9.13'
+      classpath 'com.netflix.nebula:gradle-ospackage-plugin:2.0.2'
+      classpath 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.5.1'
   }
 }
 
 apply plugin: 'io.ratpack.ratpack-groovy'
 apply plugin: 'os-package'
+apply plugin: 'groovy'
+apply plugin: "idea"
+
+idea {
+    project {
+        jdkName "1.8"
+        languageLevel "1.8"
+        ipr {
+            withXml { provider ->
+                def node = provider.asNode()
+                //configure git support for the project in idea
+                node.component.find { it.'@name' == 'VcsDirectoryMappings' }?.mapping[0].'@vcs' = 'Git'
+            }
+        }
+    }
+}
 
 repositories { 
   jcenter() 
   maven { url "http://clinker.netty.io/nexus/content/repositories/snapshots" }
+}
+
+dependencies {
+    runtime "org.slf4j:slf4j-simple:1.7.5"
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.5.1'
+    compile "io.ratpack:ratpack-gradle:0.9.13"
+    compile "io.ratpack:ratpack-jackson:0.9.13"
 }
 
 ospackage {
