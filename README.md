@@ -3,3 +3,6 @@ You can start it using just
 ```
 ./gradlew run
 ```
+
+The orignal sources of this sample can be found at
+https://github.com/danveloper/ratpack-sample
