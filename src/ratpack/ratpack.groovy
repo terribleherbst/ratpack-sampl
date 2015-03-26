@@ -113,5 +113,7 @@ ratpack {
                 }
             }
         }
+
+        assets "public"
     }
 }

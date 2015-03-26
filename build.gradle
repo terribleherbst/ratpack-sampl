@@ -41,16 +41,3 @@ dependencies {
     compile "io.ratpack:ratpack-gradle:0.9.13"
     compile "io.ratpack:ratpack-jackson:0.9.13"
 }
-
-ospackage {
-  packageName = project.applicationName
-  release '3'
-  into "/opt/${project.applicationName}"
-  from "${project.buildDir}/install/${project.applicationName}"
-}
-
-buildDeb {
-  dependsOn installApp
-  requires("openjdk-7-jre")
-  postInstall file('scripts/postInstall.sh')
-}
