@@ -1,1 +1,1 @@
-var myApp = angular.module('myApp',['ngMock']);
+var myApp = angular.module('myApp',[]);

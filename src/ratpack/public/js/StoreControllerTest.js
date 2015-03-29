@@ -3,15 +3,15 @@
 describe('Hello World example', function() {
     beforeEach(module("myApp"));
 
-    var BookListController,scope,httpBackend;
+    var StoreListController,scope,httpBackend;
 
     beforeEach(inject(function ($rootScope, $controller, $http, $httpBackend) {
         scope = $rootScope.$new();
 
         httpBackend = $httpBackend;
-        httpBackend.when("GET", "./talk").respond([{},{},{}]);
+        httpBackend.when("GET", "./stores").respond([{},{},{}]);
 
-        BookListController = $controller('BookListCtrl', {$scope: scope, $http:$http});
+        StoreListController = $controller('StoreListCtrl', {$scope: scope, $http:$http});
     }));
 
     it ('A Trivial test checking just if the view is set',inject(function() {
@@ -21,7 +21,7 @@ describe('Hello World example', function() {
 
     it("should have 3 talks", function () {
          httpBackend.flush();
-        expect(scope.books.length).toBe(3);
+        expect(scope.stores.length).toBe(3);
     });
 
  });
